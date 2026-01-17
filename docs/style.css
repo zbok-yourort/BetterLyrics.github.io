@@ -1,0 +1,105 @@
+/* docs/style.css */
+
+/* 1. 核心变量 (和主站保持一致) */
+:root {
+  --bg-gradient-top: #1a1a2e;
+  --bg: #000000;
+  --accent: #60cdff;
+  --text: #ffffff;
+  --sidebar-bg: rgba(32, 32, 32, 0.6);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+}
+
+/* 2. 全局背景 */
+body {
+  background-image: radial-gradient(
+    circle at 50% 0%,
+    var(--bg-gradient-top) 0%,
+    var(--bg) 60%
+  );
+  background-color: var(--bg);
+  font-family: "Segoe UI Variable", "Segoe UI", sans-serif !important;
+  color: var(--text);
+}
+
+/* 3. 侧边栏美化 */
+.sidebar {
+  background-color: var(--sidebar-bg) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-right: 1px solid var(--sidebar-border);
+  padding-top: 20px;
+}
+
+/* 侧边栏链接 */
+.sidebar-nav li {
+  margin: 6px 0;
+}
+.sidebar-nav a {
+  color: #a0a0a0 !important;
+  transition: all 0.2s;
+  border-right: 2px solid transparent; /* 预留边框位置 */
+  text-decoration: none !important;
+}
+
+/* 选中/悬停状态 */
+.sidebar-nav a:hover,
+.sidebar-nav li.active > a {
+  color: var(--accent) !important;
+  font-weight: bold;
+  border-right-color: var(--accent); /* WinUI 风格右侧指示条 */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05)
+  ); /* 微妙的背景光 */
+}
+
+/* 4. 内容区域美化 */
+.markdown-section {
+  max-width: 900px;
+  padding: 40px;
+  margin: 0 auto;
+}
+
+/* 标题和文字 */
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4 {
+  color: #fff;
+  font-weight: 600;
+}
+.markdown-section p,
+.markdown-section ul,
+.markdown-section ol {
+  color: #e0e0e0;
+  line-height: 1.7;
+}
+
+/* 代码块 */
+.markdown-section pre {
+  background: #1e1e1e !important;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 8px;
+}
+.markdown-section code {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent);
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+
+/* 顶部导航条 (Back to Home) */
+.app-nav {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 10;
+}
+.app-nav a {
+  color: var(--accent);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.9rem;
+}

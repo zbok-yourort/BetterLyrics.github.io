@@ -47,8 +47,8 @@
    ========================================= */
 
 html {
-    /* 🔥 核心修复：永远预留滚动条的空间 */
-    scrollbar-gutter: stable;
+  /* 🔥 核心修复：永远预留滚动条的空间 */
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -518,6 +518,20 @@ footer {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
+/* 插件 ID 样式 */
+.plugin-id {
+  display: inline-block; /* 让背景只包裹文字 */
+  font-family:
+    "Cascadia Code", "Consolas", "Courier New", monospace; /* 代码字体 */
+  font-size: 0.75rem; /* 字号更小 */
+  color: var(--text-secondary);
+  background-color: rgba(128, 128, 128, 0.1); /* 极淡的背景 */
+  padding: 2px 6px; /* 内边距 */
+  border-radius: 4px; /* 圆角 */
+  margin-bottom: 8px; /* 与下方作者信息的间距 */
+  user-select: all; /* ✨ 体验优化：双击全选，方便复制 */
+  border: 1px solid var(--border); /* 可选：加个极细的边框 */
+}
 .plugin-name {
   font-weight: 600;
   margin-bottom: 4px;
@@ -619,30 +633,30 @@ footer {
 
 /* 滚动条整体轨道 */
 ::-webkit-scrollbar {
-    width: 10px; /* 设细一点，默认是 17px */
-    background: transparent; /* 轨道透明 */
+  width: 10px; /* 设细一点，默认是 17px */
+  background: transparent; /* 轨道透明 */
 }
 
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(128, 128, 128, 0.3); /* 半透明灰色 */
-    border-radius: 5px; /* 圆角 */
-    
-    /* 🔥 关键技巧：利用边框让滑块变细，产生"悬浮"效果 */
-    border: 2px solid transparent; 
-    background-clip: content-box;
-    transition: background-color 0.2s;
+  background-color: rgba(128, 128, 128, 0.3); /* 半透明灰色 */
+  border-radius: 5px; /* 圆角 */
+
+  /* 🔥 关键技巧：利用边框让滑块变细，产生"悬浮"效果 */
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.2s;
 }
 
 /* 鼠标悬停在滑块上 */
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(128, 128, 128, 0.6); /* 变深 */
+  background-color: rgba(128, 128, 128, 0.6); /* 变深 */
 }
 
 /* 浅色模式微调 (可选) */
 [data-theme="light"] ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }

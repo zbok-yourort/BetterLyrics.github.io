@@ -93,6 +93,8 @@ function renderPlugins(plugins) {
     card.innerHTML = `
             <div>
                 <div class="plugin-name">${plugin.name}</div>
+                <code class="plugin-id">${plugin.id}</code>
+                
                 <div class="plugin-author">${texts.authorPrefix} ${plugin.author}</div>
                 <p class="plugin-desc">${desc}</p>
             </div>

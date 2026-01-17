@@ -1,28 +1,28 @@
 [
   {
-    "id": "BetterLyrics.Plugins.Netease",
-    "name": "Netease Music Source",
-    "description": {
-      "en": "Provide lyrics from Netease Cloud Music.",
-      "zh": "提供来自网易云音乐的歌词数据支持。"
-    },
-    "author": "JayFunc",
-    "version": "1.2.0",
-    "lastUpdated": "2026-01-16",
-    "url": "https://github.com/...",
-    "tags": ["Source"]
-  },
-  {
-    "id": "BetterLyrics.Plugins.Romaji",
+    "id": "BetterLyrics.Plugins.Transliteration.Romaji",
     "name": "Romaji Converter",
     "description": {
       "en": "Convert Japanese Kanji/Kana to Romaji.",
       "zh": "将日语汉字/假名转换为罗马音。"
     },
-    "author": "Community",
-    "version": "1.0.1",
+    "author": "jayfunc",
+    "version": "1.0.0",
     "lastUpdated": "2025-12-20",
+    "url": "https://github.com/BetterLyrics/BetterLyrics.Plugins.Transliteration.Romaji/releases/latest",
+    "tags": ["Transliteration"]
+  },
+  {
+    "id": "BetterLyrics.Plugins.Coming.Soon",
+    "name": "Coming soon",
+    "description": {
+      "en": "Coming soon.",
+      "zh": "敬请期待。"
+    },
+    "author": "jayfunc",
+    "version": "0.0.0",
+    "lastUpdated": "YYYY-MM-DD",
     "url": "https://github.com/...",
-    "tags": ["Tool"]
+    "tags": ["ComingSoon"]
   }
 ]

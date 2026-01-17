@@ -1,0 +1,33 @@
+# 已知支持的音乐播放器（配置指南）
+
+使用方法：找到音乐播放器，安装表格中所列出的 `插件`。
+
+> <mark>支持的音乐播放器包括但不限于下述列表，请以实际体验为准。</mark>
+
+> <mark>凡是接入了 [SMTC](https://learn.microsoft.com/zh-cn/windows/uwp/audio-video-camera/integrate-with-systemmediatransportcontrols) 的媒体播放器均受支持。</mark>
+
+| 音乐播放器 | 插件 | 注意事项 |
+| :--- | :--- | :--- |
+| [AIMP](https://www.aimp.ru) | [插件](https://www.aimp.ru/?do=catalog&rec_id=1097) | - |
+| [AMLL Player](https://github.com/Steve-xmh/applemusic-like-lyrics/blob/full-refractor/packages/player/README.md) | - | - |
+| [Apple Music](https://music.apple.com) | - | - |
+| [BetterLyrics](https://github.com/jayfunc/BetterLyrics) | - | - |
+| [foobar2000](https://www.foobar2000.org/windows) | [插件](https://github.com/dumbie/foo_mediacontrol) | 时间轴有问题 |
+| [Google Chrome](https://www.google.com/chrome) | - | - |
+| [HyPlayer](https://github.com/HyPlayer/HyPlayer) | - | - |
+| [iTunes](https://apps.microsoft.com/detail/9pb2mz1zmb1s) | [插件](https://github.com/thewizrd/iTunes-SMTC) | - |
+| [酷狗音乐](https://www.kugou.com) | - | ![](docs/assets/faq/Snipaste_2025-11-01_12-51-44.png?raw=true) 时间轴有问题 |
+| [Listen 1](https://listen1.github.io/listen1) | - | - |
+| [LX Music](https://github.com/lyswhut/lx-music-desktop) | - | 在 LX Music 设置 “开放 API” 中勾选 “启用开放 API 服务”；<br>在 BetterLyrics 设置 “播放源” 板块下的 “LX 音乐服务器” 中输入 LX Music 服务器地址。 |
+| [Microsoft Edge](https://www.microsoft.com/edge) | - | - |
+| [MoeKoe Music](https://github.com/MoeKoeMusic/MoeKoeMusic) | - | - |
+| [MusicBee](https://getmusicbee.com) | [插件](https://github.com/HenryPDT/mb_MediaControl) | - |
+| [MusicPlayer2](https://github.com/zhongyang219/MusicPlayer2) | - | - |
+| [PlanetMusic](https://apps.microsoft.com/detail/9nt5122pwqb8) | - | - |
+| [PotPlayer](https://potplayer.daum.net) | - | - |
+| [QQ 音乐](https://y.qq.com) | - | 确保使用较新版本，并在 QQ 音乐设置中启用 “显示系统媒体传输控制 (SMTC)”。 |
+| [Salt Player for Windows](https://moriafly.com/program/spw.html) | - | - |
+| [Spotify](https://open.spotify.com) | - | - |
+| [网易云音乐](https://music.163.com) | [BetterNCM](https://microblock.cc/betterncm) <br> [InfLink-rs](https://github.com/apoint123/inflink-rs) | ![](docs/assets/faq/Snipaste_2025-11-01_19-25-56.png?raw=true) |
+| [Windows Media Player](https://apps.microsoft.com/detail/9wzdncrfj3pt) | - | - |
+| ... | ... | ... |

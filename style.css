@@ -1,370 +1,648 @@
 /* =========================================
-   1. 变量定义 (CSS Variables)
+   1. 变量定义 (CSS Variables) - 统一管理
    ========================================= */
 
 /* 默认模式 (深色/Dark Mode) */
 :root {
-    --bg: #000000;
-    --bg-gradient-top: #1a1a2e; /* 🔥 找回了午夜蓝背景 */
-    --surface: rgba(32, 32, 32, 0.6);
-    --border: rgba(255, 255, 255, 0.1);
-    
-    --text: #ffffff;
-    --text-secondary: #a0a0a0;
-    
-    --accent: #60cdff;
-    --accent-hover: #4cb7eb;
-    
-    --glow-opacity: 1; /* 深色模式下光晕完全不透明 */
-    --font: "Segoe UI Variable", "Segoe UI", sans-serif;
+  --bg: #000000;
+  --bg-gradient-top: #1a1a2e; /* 午夜蓝背景 */
+  --surface: rgba(32, 32, 32, 0.6);
+  --surface-hover: rgba(48, 48, 48, 0.8);
+  --border: rgba(255, 255, 255, 0.1);
+
+  --text: #ffffff;
+  --text-secondary: #a0a0a0;
+
+  --accent: #60cdff; /* WinUI 蓝 */
+  --accent-hover: #4cb7eb;
+
+  --input-bg: rgba(0, 0, 0, 0.3); /* 搜索框背景 */
+
+  --glow-opacity: 1; /* 深色模式下光晕完全不透明 */
+  --font: "Segoe UI Variable", "Segoe UI", "Microsoft YaHei", sans-serif;
+  --card-radius: 12px;
 }
 
 /* 浅色模式 (Light Mode) */
 [data-theme="light"] {
-    --bg: #f3f3f3;
-    --bg-gradient-top: #ffffff; /* 浅色模式顶部为白色 */
-    --surface: #ffffff;
-    --border: #e5e5e5;
-    
-    --text: #202020;
-    --text-secondary: #5e5e5e;
-    
-    --accent: #0067c0; /* 深蓝色，在白底上更清晰 */
-    --accent-hover: #005a9e;
-    
-    --glow-opacity: 0.5; /* 浅色模式下光晕淡一点 */
+  --bg: #f3f3f3;
+  --bg-gradient-top: #ffffff; /* 浅色模式顶部为白色 */
+  --surface: #ffffff;
+  --surface-hover: #fcfcfc;
+  --border: #e5e5e5;
+
+  --text: #202020;
+  --text-secondary: #5e5e5e;
+
+  --accent: #0067c0; /* 深蓝色，在白底上更清晰 */
+  --accent-hover: #005a9e;
+
+  --input-bg: #ffffff;
+
+  --glow-opacity: 0.5; /* 浅色模式下光晕淡一点 */
 }
 
 /* =========================================
    2. 全局样式 (Global)
    ========================================= */
 
+html {
+    /* 🔥 核心修复：永远预留滚动条的空间 */
+    scrollbar-gutter: stable;
+}
+
 body {
-    margin: 0;
-    font-family: var(--font);
-    background-color: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    transition: background-color 0.3s, color 0.3s;
-    /* 背景径向渐变：从顶部的特色色渐变到底部的背景色 */
-    background-image: radial-gradient(circle at 50% 0%, var(--bg-gradient-top) 0%, var(--bg) 60%);
+  margin: 0;
+  font-family: var(--font);
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  background-image: radial-gradient(
+    circle at 50% 0%,
+    var(--bg-gradient-top) 0%,
+    var(--bg) 60%
+  );
+  min-height: 100vh;
 }
 
 /* 顶部随动光晕特效 */
 .glow {
-    position: absolute;
-    width: 800px;
-    height: 600px;
-    /* 这里的颜色保持固定的天蓝色，但在浅色模式下通过 opacity 变淡 */
-    background: radial-gradient(circle, rgba(96,205,255,0.15) 0%, rgba(0,0,0,0) 70%);
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%); /* 初始居中，JS 会覆盖这个 transform */
-    z-index: -1;
-    pointer-events: none;
-    opacity: var(--glow-opacity);
-    transition: opacity 0.3s;
+  position: absolute;
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(96, 205, 255, 0.15) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--glow-opacity);
+  transition: opacity 0.3s;
+}
+
+.fluent-icon {
+  width: 20px; /* 标准图标大小 */
+  height: 20px;
+  fill: currentColor; /* 关键：跟随文字颜色变化 */
+  display: block; /* 防止奇怪的行高问题 */
+  pointer-events: none;
 }
 
 /* =========================================
-   3. 头部导航 (Header)
+   3. 头部导航 (Header) - 通用
    ========================================= */
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    /* 玻璃拟态 */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent; /* 默认无边框 */
+  transition: border-color 0.3s;
 }
 
-.logo { 
-    font-weight: 700; 
-    font-size: 1.25rem; 
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
+/* 如果是插件商店，可能会给 header 加个底边框 */
+header.store-header {
+  border-bottom-color: var(--border);
+  background: rgba(0, 0, 0, 0.05);
 }
 
-.logo span { 
-    /* 文字渐变效果 */
-    background: linear-gradient(90deg, var(--text), var(--text-secondary)); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-}
-
-/* Header 右侧容器 */
+/* 头部容器布局 (Landing Page 用) */
 .header-right {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* 头部容器布局 (Store 用) */
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo span {
+  background: linear-gradient(90deg, var(--text), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 商店页 Logo 区域 */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+.logo-icon {
+  font-size: 1.5rem;
+}
+.logo-area h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  background: none;
+  -webkit-text-fill-color: var(--text);
 }
 
 nav {
-    display: flex;
-    gap: 24px; /* 这里控制 Docs 和 GitHub 之间的距离 */
-    align-items: center;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+  font-weight: 500;
+  position: relative;
+  padding: 4px 0;
+}
+nav a:hover {
+  color: var(--text);
 }
 
-nav a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.2s;
-    font-weight: 500;
+nav a.nav-active {
+  color: var(--text); /* 文字变亮 */
+  font-weight: 700; /* 字体加粗 */
 }
-nav a:hover { color: var(--text); }
+
+nav a.nav-active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--accent); /* 使用主题色 */
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--accent); /*稍微发光 */
+}
 
 /* --- 控制按钮组 (语言/主题) --- */
 .controls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: 10px;
-    padding-left: 20px;
-    border-left: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* 兼容 Landing Page 的布局 */
+  margin-left: 10px;
+  /* padding-left: 20px; border-left: 1px solid var(--border);  (Landing Page 可以保留这个) */
 }
 
 .icon-btn {
-    background: transparent;
-    border: 1px solid transparent;
-    color: var(--text-secondary);
-    cursor: pointer;
-    padding: 6px;
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+/* Store 风格的按钮可能有点底色 */
+.store-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
 }
 
 .icon-btn:hover {
-    background-color: var(--surface);
-    color: var(--text);
-    border-color: var(--border);
+  background-color: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+.text-btn {
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
-.lang-text {
-    font-weight: 600;
-    font-size: 0.9rem;
-    font-family: inherit;
+.subtitle {
+  color: var(--text-secondary);
+  margin: 4px 0 0 0;
+  font-size: 0.95rem;
 }
 
 /* =========================================
-   4. Hero 主视觉区
+   4. Landing Page 专属样式
    ========================================= */
 
 .hero {
-    text-align: center;
-    padding: 120px 20px 80px;
-    max-width: 900px;
-    margin: 0 auto;
+  text-align: center;
+  padding: 120px 20px 80px;
+  max-width: 900px;
+  margin: 0 auto;
 }
-
-h1 {
-    font-size: 4rem;
-    margin: 0 0 24px;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    /* 标题渐变：适配浅色和深色 */
-    background: linear-gradient(135deg, var(--text) 30%, var(--text-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.hero h1 {
+  font-size: 4rem;
+  margin: 0 0 24px;
+  line-height: 1.1;
+  background: linear-gradient(
+    135deg,
+    var(--text) 30%,
+    var(--text-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
-p.lead {
-    font-size: 1.35rem;
-    color: var(--text-secondary);
-    margin-bottom: 48px;
-    line-height: 1.6;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+.hero p.lead {
+  font-size: 1.35rem;
+  color: var(--text-secondary);
+  margin: 0 auto;
+  margin-bottom: 48px;
+  line-height: 1.6;
+  max-width: 700px;
 }
-
-/* =========================================
-   5. 下载徽章 (Badges)
-   ========================================= */
 
 .cta-group {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap; /* 移动端自动换行 */
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
-
-/* 通用徽章阴影和动效 */
-.ms-store-badge, .github-badge {
-    transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
-}
-
-.ms-store-badge:hover, .github-badge:hover {
-    transform: scale(1.02);
-    filter: drop-shadow(0 8px 15px rgba(96, 205, 255, 0.3));
-}
-
-/* 微软商店图片 */
-.ms-store-badge img {
-    display: block;
-    height: 48px;
-    width: auto;
-}
-
-/* GitHub 手搓徽章 */
+.ms-store-badge,
 .github-badge {
-    display: inline-flex;
-    align-items: center;
-    background-color: #000000; /* 始终保持黑色背景，符合品牌 */
-    color: #ffffff;
-    text-decoration: none;
-    height: 48px; /* 强制高度对齐 */
-    padding: 0 16px;
-    border-radius: 8px;
-    border: 1px solid #333;
-    box-sizing: border-box;
-    gap: 12px;
+  transition:
+    transform 0.2s,
+    filter 0.2s;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
 }
-
-/* 浅色模式下 GitHub 徽章微调 */
+.ms-store-badge:hover,
+.github-badge:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 8px 15px rgba(96, 205, 255, 0.3));
+}
+.ms-store-badge img {
+  display: block;
+  height: 48px;
+  width: auto;
+}
+.github-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: #000000;
+  color: #ffffff;
+  text-decoration: none;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  box-sizing: border-box;
+  gap: 12px;
+}
 [data-theme="light"] .github-badge {
-    background-color: #24292e; /* GitHub 官方深灰 */
-    border-color: transparent;
+  background-color: #24292e;
+  border-color: transparent;
 }
-
 .badge-text-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
 }
-
 .badge-text-stack .sub {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    font-weight: 500;
-    opacity: 0.8;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  opacity: 0.8;
 }
-
 .badge-text-stack .main {
-    font-size: 1.1rem;
-    font-weight: 700;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
-
-/* =========================================
-   6. 软件截图演示 (Showcase)
-   ========================================= */
 
 .showcase {
-    max-width: 1100px;
-    margin: 40px auto 100px;
-    padding: 0 20px;
-    perspective: 1000px; /* 3D 透视 */
+  max-width: 1100px;
+  margin: 40px auto 100px;
+  padding: 0 20px;
+  perspective: 1000px;
 }
-
 .app-window {
-    background: #1e1e1e; /* 截图框底色 */
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.4);
-    overflow: hidden;
-    aspect-ratio: 16/10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transform: rotateX(2deg); /* 3D 倾斜 */
-    transition: transform 0.5s ease;
+  background: #1e1e1e;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateX(2deg);
+  transition: transform 0.5s ease;
 }
-
-.app-window:hover { 
-    transform: rotateX(0deg); /* 悬停回正 */
+.app-window:hover {
+  transform: rotateX(0deg);
 }
-
 .app-screenshot {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
-
-/* =========================================
-   7. 特性网格 (Features)
-   ========================================= */
 
 .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto 100px;
-    padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  padding: 0 20px;
 }
-
 .feature-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 32px;
-    border-radius: 12px;
-    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px;
+  border-radius: 12px;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(96, 205, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  display: block;
+}
+.feature-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  color: var(--text);
+}
+.feature-card p {
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.feature-card:hover { 
-    transform: translateY(-5px); 
-    border-color: rgba(96, 205, 255, 0.3);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-}
-
-.icon { 
-    font-size: 2.5rem; 
-    margin-bottom: 20px; 
-    display: block; 
-}
-
-.feature-card h3 { 
-    margin: 0 0 12px; 
-    font-size: 1.25rem; 
-    color: var(--text);
-}
-
-.feature-card p { 
-    color: var(--text-secondary); 
-    margin: 0; 
-    line-height: 1.6; 
+footer {
+  text-align: center;
+  padding: 60px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
 }
 
 /* =========================================
-   8. 页脚 (Footer) & 移动端适配
+   5. 插件商店 (Plugin Store) 专属样式
    ========================================= */
 
-footer {
-    text-align: center;
-    padding: 60px 20px;
-    border-top: 1px solid var(--border);
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+.store-page-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 20px; /* 顶部留出空间，不要贴着导航栏 */
+  text-align: center; /* 居中对齐，看起来更整洁 */
 }
 
+/* 商店标题的大小 (比 Hero 小，但比正文大) */
+.store-page-header h1 {
+  font-size: 2.5rem; /* 适中的标题大小 */
+  margin: 0 0 10px;
+  font-weight: 700;
+  /* 继承主页的渐变色风格，或者用纯色 */
+  background: linear-gradient(
+    135deg,
+    var(--text) 30%,
+    var(--text-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 商店副标题 */
+.store-page-header .subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+/* 搜索框 */
+.search-wrapper {
+  margin: 0 auto;
+}
+.search-container {
+  max-width: 500px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px 12px 10px 40px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.search-container input:hover {
+  background: var(--surface-hover);
+}
+.search-container input:focus {
+  background: var(--bg);
+  border-color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.search-container .fluent-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.7; /* 让搜索图标稍微淡一点 */
+}
+
+/* 插件网格 */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 24px 60px;
+}
+
+/* 插件卡片 (注意：这里用 .card 而不是 .feature-card) */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+  backdrop-filter: blur(10px);
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96, 205, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.plugin-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 1.15em;
+  color: var(--text);
+}
+.plugin-author {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.plugin-desc {
+  flex-grow: 1;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  font-size: 0.95em;
+  color: var(--text-secondary);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+
+/* 下载按钮 */
+.btn-download {
+  background-color: var(--accent);
+  color: #000;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition:
+    filter 0.2s,
+    transform 0.2s;
+}
+[data-theme="light"] .btn-download {
+  color: #fff;
+}
+.btn-download:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+#loading {
+  text-align: center;
+  margin-top: 60px;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* =========================================
+   6. 移动端适配
+   ========================================= */
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    .hero { padding-top: 60px; }
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .hero {
+    padding-top: 60px;
+  }
+  header {
+    padding: 15px 0;
+  }
+  .header-inner,
+  .header-right {
+    padding: 0 20px;
+  }
+
+  .cta-group {
+    flex-direction: column;
+    align-items: center;
+  }
+  .ms-store-badge img,
+  .github-badge {
+    width: 100%;
+    max-width: 300px;
+  }
+  .github-badge {
+    justify-content: center;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   WinUI 风格滚动条 (Webkit Only: Chrome/Edge)
+   ========================================= */
+
+/* 滚动条整体轨道 */
+::-webkit-scrollbar {
+    width: 10px; /* 设细一点，默认是 17px */
+    background: transparent; /* 轨道透明 */
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    background-color: rgba(128, 128, 128, 0.3); /* 半透明灰色 */
+    border-radius: 5px; /* 圆角 */
     
-    /* 移动端导航简化 */
-    header { padding: 15px 20px; }
-    .logo span { display: none; /* 移动端只显示 Logo 图标，隐藏文字防止拥挤 */ }
-    nav a { margin-left: 16px; }
-    
-    .cta-group { flex-direction: column; align-items: center; }
-    .ms-store-badge img, .github-badge { width: 100%; max-width: 300px; }
-    .github-badge { justify-content: center; }
+    /* 🔥 关键技巧：利用边框让滑块变细，产生"悬浮"效果 */
+    border: 2px solid transparent; 
+    background-clip: content-box;
+    transition: background-color 0.2s;
+}
+
+/* 鼠标悬停在滑块上 */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(128, 128, 128, 0.6); /* 变深 */
+}
+
+/* 浅色模式微调 (可选) */
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.4);
 }

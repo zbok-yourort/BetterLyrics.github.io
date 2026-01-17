@@ -1,6 +1,4 @@
-﻿**English** | [**中文**](USER_GUIDE.CN.md)
-
-# ❓ Frequently Asked Questions (FAQ)
+﻿# ❓ Frequently Asked Questions (FAQ)
 
 ## 🎵 Playback & Connection
 

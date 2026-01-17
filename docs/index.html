@@ -1,27 +1,81 @@
-<head>
-  <meta charset="UTF-8" />
-  <title>BetterLyrics Documentation</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
-  />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BetterLyrics Documentation</title>
 
-  <link
-    rel="stylesheet"
-    href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css"
-  />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="glow" id="glow-effect"></div>
+    <header>
+      <div class="header-inner">
+        <a
+          href="../"
+          class="logo"
+          style="text-decoration: none; color: inherit"
+        >
+          <img
+            src="../assets/logo.png"
+            alt="Logo"
+            height="48"
+            style="display: block"
+          />
+          <span>BetterLyrics</span>
+        </a>
 
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="app">Loading docs...</div>
+        <div class="header-right">
+          <nav>
+            <a href="../plugins/" data-i18n="nav_plugins_store">Plugin Store</a>
+            <a href="../docs/" class="nav-active" data-i18n="nav_docs">Docs</a>
 
-  <script src="script.js"></script>
+            <a href="https://github.com/jayfunc/BetterLyrics" target="_blank"
+              >GitHub</a
+            >
+          </nav>
 
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+          <div class="controls">
+            <button id="btn-lang" class="icon-btn" aria-label="Switch Language">
+              <span class="lang-text">中</span>
+            </button>
+            <button id="btn-theme" class="icon-btn" title="Toggle Theme">
+              <svg
+                class="fluent-icon icon-sun"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 3C12.5523 3 13 3.44772 13 4V6C13 6.55228 12.5523 7 12 7C11.4477 7 11 6.55228 11 6V4C11 3.44772 11.4477 3 12 3ZM17.6569 5.63604C18.0474 5.24551 18.6806 5.24551 19.0711 5.63604C19.4616 6.02656 19.4616 6.65973 19.0711 7.05025L17.6569 8.46447C17.2663 8.85499 16.6332 8.85499 16.2426 8.46447C15.8521 8.07394 15.8521 7.44078 16.2426 7.05025L17.6569 5.63604ZM21 12C21 12.5523 20.5523 13 20 13H18C17.4477 13 17 12.5523 17 12C17 11.4477 17.4477 11 18 11H20C20.5523 11 21 11.4477 21 12ZM19.0711 18.364C18.6806 18.7545 18.0474 18.7545 17.6569 18.364L16.2426 16.9497C15.8521 16.5592 16.2426 15.9261 16.6332 15.5355C17.0237 15.145 17.6569 15.145 18.0474 15.5355L19.4616 16.9497C19.8521 17.3403 19.8521 17.9734 19.0711 18.364ZM12 21C11.4477 21 11 20.5523 11 20V18C11 17.4477 11.4477 17 12 17C12.5523 17 13 17.4477 13 18V20C13 20.5523 12.5523 21 12 21ZM6.34315 18.364L4.92893 16.9497C4.53841 16.5592 4.53841 15.9261 4.92893 15.5355C5.31946 15.145 5.95262 15.145 6.34315 15.5355L7.75736 16.9497C8.14788 17.3403 8.14788 17.9734 7.75736 18.364C7.36683 18.7545 6.73367 18.7545 6.34315 18.364ZM3 12C3 11.4477 3.44772 11 4 11H6C6.55228 11 7 11.4477 7 12C7 12.5523 6.55228 13 6 13H4C3.44772 13 3 12.5523 3 12ZM4.92893 7.05025C4.53841 6.65973 4.53841 6.02656 4.92893 5.63604L6.34315 4.22183C6.73367 3.8313 7.36683 3.8313 7.75736 4.22183C8.14788 4.61235 8.14788 5.24551 7.75736 5.63604L6.34315 7.05025C5.95262 7.44078 5.31946 7.44078 4.92893 7.05025ZM12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8Z"
+                />
+              </svg>
 
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
-</body>
+              <svg
+                class="fluent-icon icon-moon"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                style="display: none"
+              >
+                <path
+                  d="M12.0628 2.00065C12.3924 1.95676 12.6346 2.32757 12.4632 2.61662C11.352 4.49072 11.4589 6.88373 12.839 8.64964C14.2568 10.4637 16.4801 11.4393 18.7836 11.2327C19.1221 11.2023 19.3789 11.5369 19.2312 11.8443C17.9622 14.4851 15.3908 16.4842 12.3551 16.8997C8.42878 17.4371 4.75053 14.7171 4.10397 10.7963C3.49392 7.09703 5.86178 3.59379 9.38914 2.37893C9.68962 2.27544 10.0152 2.37811 10.218 2.62791L10.222 2.63288C10.5186 2.99912 11.0827 3.03036 11.4187 2.69871L11.4552 2.66271C11.666 2.45465 11.8329 2.21338 11.9567 1.95213C11.9839 1.96637 12.0197 1.98254 12.0628 2.00065ZM12.0826 18.8913C15.698 18.3963 18.7063 16.0305 20.1706 12.9238C20.6974 12.9318 21.1444 13.2519 21.3253 13.7504C21.821 15.1158 21.7235 16.6385 20.9835 17.9205C19.1337 21.1251 15.0718 22.2234 11.8672 20.3736C8.66266 18.5238 7.5644 14.4619 9.41421 11.2573C10.1542 9.97541 11.3093 9.03268 12.6732 8.53589C11.6881 9.59369 11.1687 11.0263 11.2404 12.4938C11.3258 14.2415 12.2359 15.8239 13.6828 16.8913C13.1677 16.9618 12.637 16.9922 12.0826 16.8913Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div id="app">Loading docs...</div>
+
+    <script src="script.js"></script>
+    <script src="../script.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
+  </body>
+</html>

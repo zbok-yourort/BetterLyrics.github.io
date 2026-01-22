@@ -30,6 +30,10 @@ export default defineConfig({
         },
       },
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/BetterLyrics/BetterLyrics.github.io' }],
+      lastUpdated: true,
+      editLink: {
+        baseUrl: 'https://github.com/BetterLyrics/BetterLyrics.github.io/edit/main/',
+      },
 		}),
 	],
 });

@@ -10,7 +10,7 @@ export default defineConfig({
       plugins: [
         starlightThemeNova(/* options */),
       ],
-      favicon: "/public/favicon.ico",
+      favicon: "/favicon.ico",
       title: "BetterLyrics",
       customCss: [
         // 你的自定义 CSS 文件的相对路径

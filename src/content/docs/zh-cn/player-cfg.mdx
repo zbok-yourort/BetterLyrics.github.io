@@ -1,35 +1,31 @@
 ---
-title: 音乐播放器配置
+title: 播放器适配指南
 ---
 
-使用方法：找到音乐播放器，安装表格中所列出的 `插件`。
+import { Badge } from '@astrojs/starlight/components';
 
-> 支持的音乐播放器包括但不限于下述列表，请以实际体验为准。
+> 本小节汇总了 BetterLyrics 支持的主流播放器及其配置指南。请在左侧导航栏中选择您使用的播放器查看详情。
 
-> 凡是接入了 [SMTC](https://learn.microsoft.com/zh-cn/windows/uwp/audio-video-camera/integrate-with-systemmediatransportcontrols) 的媒体播放器均受支持。
+## 核心机制说明
 
-| 音乐播放器 | 插件 | 注意事项 |
+BetterLyrics 主要通过 **[系统媒体传输控制（SMTC）](https://learn.microsoft.com/zh-cn/windows/uwp/audio-video-camera/integrate-with-systemmediatransportcontrols)** 来获取播放信息。根据适配难度，播放器通常分为两类：
+
+### 1. 开箱即用（原生支持 SMTC）
+凡是完整接入了 **SMTC** 的现代播放器，通常 **无需任何配置** 即可直接使用。
+* **包括**：Spotify, Apple Music, Windows Media Player（新版）, Chrome/Edge 浏览器等。
+
+### 2. 需要配置（插件/设置）
+部分传统播放器或深度定制的软件，需要 **安装专用插件** 或 **开启特定开关** 才能对外暴露播放信息。
+* **包括**：AIMP, foobar2000, 网易云音乐, QQ 音乐等。
+
+## 标签说明
+
+在左侧导航栏中，我们使用以下标签标识播放器的适配状态：
+
+| 标签 | 含义 | 说明 |
 | :--- | :--- | :--- |
-| [AIMP](https://www.aimp.ru) | [插件](https://www.aimp.ru/?do=catalog&rec_id=1097) | - |
-| [AMLL Player](https://github.com/Steve-xmh/applemusic-like-lyrics/blob/full-refractor/packages/player/README.md) | - | - |
-| [Apple Music](https://music.apple.com) | - | - |
-| [BetterLyrics](https://github.com/jayfunc/BetterLyrics) | - | - |
-| [foobar2000](https://www.foobar2000.org/windows) | [插件](https://github.com/dumbie/foo_mediacontrol) | 时间轴有问题 |
-| [Google Chrome](https://www.google.com/chrome) | - | - |
-| [HyPlayer](https://github.com/HyPlayer/HyPlayer) | - | - |
-| [iTunes](https://apps.microsoft.com/detail/9pb2mz1zmb1s) | [插件](https://github.com/thewizrd/iTunes-SMTC) | - |
-| [酷狗音乐](https://www.kugou.com) | - | 时间轴有问题，可考虑使用[MoeKoe Music](https://github.com/MoeKoeMusic/MoeKoeMusic)。 |
-| [Listen 1](https://listen1.github.io/listen1) | - | - |
-| [LX Music](https://github.com/lyswhut/lx-music-desktop) | - | 在 LX Music 设置 “开放 API” 中勾选 “启用开放 API 服务”；<br/>在 BetterLyrics 设置 “播放源” 板块下的 “LX 音乐服务器” 中输入 LX Music 服务器地址。 |
-| [Microsoft Edge](https://www.microsoft.com/edge) | - | - |
-| [MoeKoe Music](https://github.com/MoeKoeMusic/MoeKoeMusic) | - | 酷狗音乐第三方播放器，时间轴完美支持。 |
-| [MusicBee](https://getmusicbee.com) | [插件](https://github.com/HenryPDT/mb_MediaControl) | - |
-| [MusicPlayer2](https://github.com/zhongyang219/MusicPlayer2) | - | - |
-| [PlanetMusic](https://apps.microsoft.com/detail/9nt5122pwqb8) | - | - |
-| [PotPlayer](https://potplayer.daum.net) | - | - |
-| [QQ 音乐](https://y.qq.com) | [插件](https://github.com/apoint123/QQMusic-ID-Injector) | 确保使用较新版本，并在 QQ 音乐设置中启用 “显示系统媒体传输控制 (SMTC)”。如想体验精准匹配，请使用插件，并确保QQ音乐歌词源置于首位。 |
-| [Salt Player for Windows](https://moriafly.com/program/spw.html) | - | - |
-| [Spotify](https://open.spotify.com) | - | - |
-| [网易云音乐](https://music.163.com) | [BetterNCM](https://microblock.cc/betterncm) <br/> [InfLink-**RS**](https://github.com/apoint123/inflink-rs) | 仔细阅读各项目说明，并按先后顺序安装两个插件。如想体验精准匹配，请确保网易云音乐歌词源置于首位。 |
-| [Windows Media Player](https://apps.microsoft.com/detail/9wzdncrfj3pt) | - | 仅支持新版媒体播放器，传统版 Windows Media Player 不受支持。 |
-| ... | ... | ... |
+| （无） | **免配置** | 开箱即用，原生支持 SMTC，无需任何操作。 |
+| <Badge variant="note" text="Config" /> | **需配置** | 需在软件设置中开启特定开关，或安装第三方插件。 |
+| <Badge variant="caution" text="Limited" /> | **受限** | 存在功能缺失（如无法拖拽进度条、时间轴偏差等）。 |
+
+> ⚠️ **注意**：支持列表持续更新中，请以软件实际体验为准。

@@ -1,35 +1,27 @@
 ---
-title: Player Configuration
+title: Player Setup Guide
 ---
 
-Usage: Find your music player and install the `Plugin` listed in the table.
+import { Badge } from '@astrojs/starlight/components';
 
-> Supported music players include, but are not limited to, the list below. Please refer to your actual experience for confirmation.
+> This section summarizes the mainstream players supported by BetterLyrics along with their configuration guides. Please select your specific player from the list on the left for details.
 
-> All media players that have integrated with [SMTC](https://learn.microsoft.com/en-us/windows/uwp/audio-video-camera/integrate-with-systemmediatransportcontrols) are supported.
+## Core Mechanism
 
-| Music Player | Plugin | Notes |
+BetterLyrics primarily retrieves playback information via the **[System Media Transport Controls (SMTC)](https://learn.microsoft.com/en-us/windows/uwp/audio-video-camera/integrate-with-systemmediatransportcontrols)**. Depending on the integration level, players generally fall into two categories:
+
+### 1. Out of the Box (Native SMTC Support)
+Modern players that fully integrate with **SMTC** typically require **no configuration** and work immediately.
+* **Includes**: Spotify, Apple Music, Media Player (New), Chrome/Edge browsers, etc.
+
+### 2. Configuration Required (Plugins/Settings)
+Some legacy players or heavily customized software require **installing specific plugins** or **enabling specific settings** to expose playback information.
+* **Includes**: AIMP, foobar2000, NetEase Cloud Music, QQ Music, etc.
+
+| Badge | Meaning | Description |
 | :--- | :--- | :--- |
-| [AIMP](https://www.aimp.ru) | [Plugin](https://www.aimp.ru/?do=catalog&rec_id=1097) | - |
-| [AMLL Player](https://github.com/Steve-xmh/applemusic-like-lyrics/blob/full-refractor/packages/player/README.md) | - | - |
-| [Apple Music](https://music.apple.com) | - | - |
-| [BetterLyrics](https://github.com/jayfunc/BetterLyrics) | - | - |
-| [foobar2000](https://www.foobar2000.org/windows) | [Plugin](https://github.com/dumbie/foo_mediacontrol) | Timeline issues |
-| [Google Chrome](https://www.google.com/chrome) | - | - |
-| [HyPlayer](https://github.com/HyPlayer/HyPlayer) | - | - |
-| [iTunes](https://apps.microsoft.com/detail/9pb2mz1zmb1s) | [Plugin](https://github.com/thewizrd/iTunes-SMTC) | - |
-| [Kugou Music](https://www.kugou.com) | - | Timeline issues; consider using [MoeKoe Music](https://github.com/MoeKoeMusic/MoeKoeMusic). |
-| [Listen 1](https://listen1.github.io/listen1) | - | - |
-| [LX Music](https://github.com/lyswhut/lx-music-desktop) | - | Check "Enable Open API Service" in LX Music Settings "Open API";<br/>Input LX Music server address in BetterLyrics Settings under "Playback Sources" -> "LX Music Server". |
-| [Microsoft Edge](https://www.microsoft.com/edge) | - | - |
-| [MoeKoe Music](https://github.com/MoeKoeMusic/MoeKoeMusic) | - | Third-party player for Kugou Music, with perfect timeline support. |
-| [MusicBee](https://getmusicbee.com) | [Plugin](https://github.com/HenryPDT/mb_MediaControl) | - |
-| [MusicPlayer2](https://github.com/zhongyang219/MusicPlayer2) | - | - |
-| [Netease Cloud Music](https://music.163.com) | [BetterNCM](https://microblock.cc/betterncm) <br/> [InfLink-rs](https://github.com/apoint123/inflink-rs) | Read the project instructions carefully and install the two plugins in order. For precise matching, ensure the Netease Cloud Music lyric source is prioritized first. |
-| [PlanetMusic](https://apps.microsoft.com/detail/9nt5122pwqb8) | - | - |
-| [PotPlayer](https://potplayer.daum.net) | - | - |
-| [QQ Music](https://y.qq.com) | [Plugin](https://github.com/apoint123/QQMusic-ID-Injector) | Ensure you are using a newer version, and enable "Show System Media Transport Controls (SMTC)" in QQ Music settings. For precise matching, use the plugin and ensure the QQ Music lyric source is prioritized first. |
-| [Salt Player for Windows](https://moriafly.com/program/spw.html) | - | - |
-| [Spotify](https://open.spotify.com) | - | - |
-| [Windows Media Player](https://apps.microsoft.com/detail/9wzdncrfj3pt) | - | Only supports the new Media Player; the legacy Windows Media Player is not supported. |
-| ... | ... | ... |
+| (None) | **Native** | Out-of-the-box support. No setup required. |
+| <Badge variant="note" text="Config" /> | **Config** | Requires changing settings or installing third-party plugins. |
+| <Badge variant="caution" text="Limited" /> | **Limited** | Functional limitations (e.g., read-only seek, timeline offset). |
+
+> ⚠️ **Note**: The support list is continuously updated. Please refer to the actual experience with the software.

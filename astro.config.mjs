@@ -33,7 +33,7 @@ export default defineConfig({
           translations: {
             "zh-CN": "歌词源配置",
           },
-          items: [{ slug: "lyrics-cfg/am" }],
+          items: [{ slug: "lyrics-cfg/apple-music" }],
         },
         {
           label: "Player Config",

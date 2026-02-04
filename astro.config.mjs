@@ -14,7 +14,9 @@ export default defineConfig({
           translations: {
             "zh-CN": "从这里开始",
           },
-          items: [{ slug: "get-started/welcome" }],
+          items: [{ slug: "get-started/welcome" }
+                  { slug: "get-started/install" }
+          ],
         },
         {
           label: "FAQ",
